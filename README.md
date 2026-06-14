@@ -4,15 +4,11 @@ CLI para generar componentes de React de forma rápida y consistente.
 
 Este proyecto automatiza la creación de carpetas, archivos y plantilla base de cada componente, evitando tener que hacerlo manualmente cada vez.
 
----
-
-## ¿Por qué este proyecto?
+## ¿Why this project?
 
 Este proyecto nació para resolver una tarea repetitiva: crear componentes uno por uno, con su carpeta, su archivo principal y su archivo de estilos.
 
-Cuando se trabaja con React y se organiza la interfaz en muchos componentes, hacerlo manualmente se vuelve tosco y consume tiempo. Esta CLI resuelve ese problema con un comando simple y, además, permite aprender y trabajar con herramientas de Node.js orientadas a línea de comandos, algo que no siempre se usa cuando se trabaja con Node de forma más tradicional.
-
----
+Cuando se trabaja con React y se organiza la interfaz en muchos componentes, hacerlo manualmente se vuelve tedioso y consume tiempo. Esta CLI resuelve ese problema con un comando simple y, además, permite aprender y trabajar con herramientas de Node.js orientadas a línea de comandos, algo que no siempre se usa cuando se trabaja con Node de forma más tradicional como backend de un proyecto.
 
 ## Características
 
@@ -24,8 +20,6 @@ Cuando se trabaja con React y se organiza la interfaz en muchos componentes, hac
 * Crea componentes en el directorio actual.
 * Permite crear componentes anidados dentro de otras carpetas de componentes.
 * Evita sobrescribir componentes existentes.
-
----
 
 ## Uso
 
@@ -40,8 +34,6 @@ Crear varios componentes:
 ```bash
 rgc PostCard PostGrid Button
 ```
-
----
 
 ## Estructura generada
 
@@ -67,11 +59,9 @@ PostCard/
 └── PostCard.css
 ```
 
----
-
 ## Plantilla generada
 
-Para un componente llamado `PostCard`, el archivo `index.jsx` contiene una estructura base como esta:
+Para un componente llamado `PostCard`, el archivo `index.jsx` o `index.tsx` contiene una estructura base como esta:
 
 ```jsx
 import "./PostCard.css";
@@ -86,8 +76,6 @@ const PostCard = () => {
 
 export default PostCard;
 ```
-
----
 
 ## Directorio actual
 
@@ -130,22 +118,20 @@ PostGrid/
     └── PostCard.css
 ```
 
----
-
 ## Detección de TypeScript
 
 La CLI detecta automáticamente si existe un archivo `tsconfig.json` en el proyecto.
 
-* Si lo encuentra, genera `index.tsx`.
-* Si no lo encuentra, genera `index.jsx`.
+- Si lo encuentra, genera un archivo `index.tsx`.
+- Si no lo encuentra, genera un archivo `index.jsx`.
 
----
+La estructura generada y la plantilla del componente son las mismas en ambos casos. La única diferencia es la extensión del archivo principal.
 
-## Validación de nombres
+## Validación de nombres de componentes
 
-La herramienta valida los nombres antes de crear archivos.
+La herramienta verifica que el nombre ingresado tenga un formato válido antes de crear los archivos.
 
-### Nombres válidos
+### Nombres permitidos
 
 ```bash
 rgc PostCard
@@ -153,18 +139,22 @@ rgc post-card
 rgc button
 ```
 
-### Nombres inválidos
+### Nombres incorrectos
 
 ```bash
 rgc 123
 rgc "Mi Componente"
 ```
 
----
-
 ## Manejo de errores
 
-Si un componente con ese nombre ya existe, la generación se detiene y se muestra un error.
+La CLI evita generar archivos cuando detecta situaciones que podrían producir resultados inesperados.
+
+Algunos ejemplos:
+
+- El componente ya existe.
+- El nombre ingresado tiene un formato incorrecto.
+- No se proporcionó ningún nombre de componente.
 
 Ejemplo:
 
@@ -172,15 +162,11 @@ Ejemplo:
 Error: Component "PostCard" already exists.
 ```
 
----
-
 ## Estilos
 
 El proyecto genera archivos `.css`.
 
 Por ahora no utiliza SCSS.
-
----
 
 ## Tecnologías
 
@@ -188,9 +174,3 @@ Por ahora no utiliza SCSS.
 * Commander.js
 * `fs`
 * `path`
-
----
-
-## Licencia
-
-ISC
