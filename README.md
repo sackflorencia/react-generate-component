@@ -21,28 +21,76 @@ It automates the creation of component folders, entry files, and styles, reducin
 - Include a ready-to-use React component template
 
 ## Installation
-
-Install the CLI globally with npm:
-
+ 
+You can use this CLI in two different ways depending on your workflow.
+ 
+### Method A: Global installation (recommended for frequent use)
+ 
+Install the package globally so the `rgc` command is available anywhere in your system:
+ 
 ```bash
-npm install -g @sackflorencia/react-generate-component
+npm i -g @sackflorencia/react-generate-component
 ```
-
-After installation, the `rgc` command will be available globally.
-
-## Usage
-
-Create a single component:
-
+ 
+After installation, you can use the CLI directly:
+ 
 ```bash
 rgc PostCard
 ```
-
-Create multiple components at once:
-
+ 
+You can also generate multiple components at once:
+ 
 ```bash
 rgc PostCard PostGrid Button
 ```
+ 
+### Method B: Local installation (per project)
+ 
+Install it as a dev dependency in your project:
+ 
+```bash
+npm i @sackflorencia/react-generate-component
+```
+ 
+Then use it with `npx`, which will pick up the local version:
+ 
+```bash
+npx rgc PostCard
+```
+ 
+Multiple components are also supported:
+ 
+```bash
+npx rgc PostCard PostGrid Button
+```
+ 
+---
+ 
+## Usage
+ 
+The CLI generates React components based on the provided names.
+ 
+Create a single component:
+ 
+```bash
+# global
+rgc PostCard
+ 
+# local
+npx rgc PostCard
+```
+ 
+Create multiple components:
+ 
+```bash
+# global
+rgc PostCard PostGrid Button
+ 
+# local
+npx rgc PostCard PostGrid Button
+```
+ 
+---
 
 ## Output Structure
 
