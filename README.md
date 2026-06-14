@@ -1,4 +1,8 @@
-# React Generate Component
+# react-generate-component
+
+[![npm version](https://img.shields.io/npm/v/@sackflorencia/react-generate-component.svg)](https://www.npmjs.com/package/@sackflorencia/react-generate-component)
+[![downloads](https://img.shields.io/npm/dm/@sackflorencia/react-generate-component.svg)](https://www.npmjs.com/package/@sackflorencia/react-generate-component)
+
 
 A fast and lightweight CLI tool for generating React components with a consistent structure.
 
