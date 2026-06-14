@@ -14,11 +14,12 @@ for (let i = 0; i < components.length; i++) {
     continue
   }
   fs.mkdirSync(folderRoute)
-  console.log(`Succesfully created component ${component} directory`)
+  console.log(`Created component ${component} directory`)
+  const jsxData = componentize(component)
+  const jsxFileRoute = path.join(folderRoute, "index.jsx")
+  const cssFileRoute = path.join(folderRoute, `${component}.css`)
+  fs.writeFileSync(jsxFileRoute, jsxData)
+  console.log(`Created ${component} index.js`)
+  fs.writeFileSync(cssFileRoute, "")
+  console.log(`Created ${component}.css`)
 }
-
-
-
-// console.log(myArgs)
-
-// console.log(componentize("PostCard"))

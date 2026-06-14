@@ -1,6 +1,5 @@
 const componentize = (name) => {
-  return `
-import "./${name}.css";
+  return `import "./${name}.css";
 
 const ${name} = () => {
   return (
@@ -10,7 +9,6 @@ const ${name} = () => {
   );
 };
 
-export default ${name};
-  `
+export default ${name};`
 }
 export default componentize;
