@@ -3,11 +3,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import componentize from "./src/template.js";
+import validateComponentName from './src/validateComponentName.js';
 
 const args = process.argv
 const components = args.slice(2)
 for (let i = 0; i < components.length; i++) {
   const component = components[i]
+  if (!validateComponentName(component)) {
+    console.log(`Error: "${component}" is not a valid component name.`);
+    continue;
+  }
   const folderRoute = path.join(process.cwd(), component)
   if (fs.existsSync(folderRoute)) {
     console.log(`Error: Component "${component}" already exists.`)
