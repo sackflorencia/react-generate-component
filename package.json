@@ -1,0 +1,26 @@
+{
+  "name": "react-generate-component",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/sackflorencia/react-generate-component#readme",
+  "bugs": {
+    "url": "https://github.com/sackflorencia/react-generate-component/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sackflorencia/react-generate-component.git"
+  },
+  "license": "ISC",
+  "author": "sackflorencia",
+  "main": "generate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "commander": "^15.0.0"
+  },
+  "bin": {
+    "rgc": "./index.js"
+  },
+  "type": "module"
+}
