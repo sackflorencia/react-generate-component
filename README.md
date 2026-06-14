@@ -1,67 +1,69 @@
 # React Generate Component
 
-CLI para generar componentes de React de forma rápida y consistente.
+A fast and lightweight CLI tool for generating React components with a consistent structure.
 
-Este proyecto automatiza la creación de carpetas, archivos y plantilla base de cada componente, evitando tener que hacerlo manualmente cada vez.
+It automates the creation of component folders, entry files, and styles, reducing repetitive setup when building React applications.
 
-## ¿Why this project?
+## Features
 
-Este proyecto nació para resolver una tarea repetitiva y tediosa: crear componentes uno por uno, con su carpeta, su archivo principal y su archivo de estilos.
+- Generate React components with a single command
+- Create multiple components at once
+- Generate the folder structure automatically
+- Create `index.jsx` or `index.tsx` depending on the project
+- Detect TypeScript automatically by searching for `tsconfig.json`
+- Create components in the current working directory
+- Support nested component creation
+- Prevent overwriting existing components
+- Include a ready-to-use React component template
 
-Cuando se trabaja con React y se organiza la interfaz en muchos componentes, hacerlo manualmente se vuelve tedioso y consume tiempo. Además de resolver una necesidad real de mi flujo de trabajo, el proyecto fue una oportunidad para profundizar en el desarrollo de herramientas de línea de comandos con Node.js, explorando conceptos como procesamiento de argumentos, generación de archivos y automatización de tareas.
+## Installation
 
-## Características
+Install the CLI globally with npm:
 
-* Genera componentes React con un comando.
-* Permite crear uno o varios componentes a la vez.
-* Crea la estructura de carpetas y archivos automáticamente.
-* Genera una plantilla base dentro de `index.jsx` o `index.tsx`.
-* Detecta automáticamente si el proyecto usa TypeScript.
-* Crea componentes en el directorio actual.
-* Permite crear componentes anidados dentro de otras carpetas de componentes.
-* Evita sobrescribir componentes existentes.
+```bash
+npm install -g @sackflorencia/react-generate-component
+```
 
-## Uso
+After installation, the `rgc` command will be available globally.
 
-Crear un componente:
+## Usage
+
+Create a single component:
 
 ```bash
 rgc PostCard
 ```
 
-Crear varios componentes:
+Create multiple components at once:
 
 ```bash
 rgc PostCard PostGrid Button
 ```
 
-## Estructura generada
+## Output Structure
 
-Al ejecutar:
+### JavaScript project
 
-```bash
-rgc PostCard
 ```
-
-se genera:
-
-```txt
 PostCard/
 ├── index.jsx
 └── PostCard.css
 ```
 
-Si el proyecto está configurado como TypeScript, la estructura pasa a ser:
+### TypeScript project
 
-```txt
+If a `tsconfig.json` file is detected, the CLI generates:
+
+```
 PostCard/
 ├── index.tsx
 └── PostCard.css
 ```
+## Component Template
 
-## Plantilla generada
+Generated components use a basic React functional component template.
 
-Para un componente llamado `PostCard`, el archivo `index.jsx` o `index.tsx` contiene una estructura base como esta:
+### JavaScript
 
 ```jsx
 import "./PostCard.css";
@@ -77,100 +79,171 @@ const PostCard = () => {
 export default PostCard;
 ```
 
-## Directorio actual
+### TypeScript
 
-Los componentes se crean en la carpeta en la que se ejecuta el comando.
+The same template is used for TypeScript projects. The only difference is the file extension: `index.tsx` instead of `index.jsx`.
 
-Ejemplo:
+---
+
+## Working Directory
+
+Components are created in the directory where the command is executed.
 
 ```bash
 cd src/components
 rgc PostCard
 ```
 
-Resultado:
+Result:
 
-```txt
-src/
-└── components/
-    └── PostCard/
-        ├── index.jsx
-        └── PostCard.css
+```
+src/components/PostCard/
+├── index.jsx
+└── PostCard.css
 ```
 
-Esto también permite crear componentes anidados.
+---
 
-Ejemplo:
+## Nested Components
+
+The CLI supports nested component creation.
 
 ```bash
+cd src/components
+rgc PostGrid
 cd PostGrid
 rgc PostCard
+cd ..
 ```
 
-Resultado:
+Result:
 
-```txt
-PostGrid/
-├── index.jsx
-├── PostGrid.css
-└── PostCard/
-    ├── index.jsx
-    └── PostCard.css
+```
+components/
+├── PostGrid/
+│   ├── index.jsx
+│   ├── PostGrid.css
+│   └── PostCard/
+│       ├── index.jsx
+│       └── PostCard.css
 ```
 
-## Detección de TypeScript
+---
 
-La CLI detecta automáticamente si existe un archivo `tsconfig.json` en el proyecto.
+## How TypeScript Detection Works
 
-- Si lo encuentra, genera un archivo `index.tsx`.
-- Si no lo encuentra, genera un archivo `index.jsx`.
+The CLI searches for a `tsconfig.json` file starting from the current working directory (`process.cwd()`) and moves upward through parent directories.
 
-La estructura generada y la plantilla del componente son las mismas en ambos casos. La única diferencia es la extensión del archivo principal.
+| Condition | Output |
+|---|---|
+| `tsconfig.json` found | generates `index.tsx` |
+| `tsconfig.json` not found | generates `index.jsx` |
 
-## Validación de nombres de componentes
+This makes the tool automatically compatible with both JavaScript and TypeScript projects without any extra configuration.
 
-La herramienta verifica que el nombre ingresado tenga un formato válido antes de crear los archivos.
+---
 
-### Nombres permitidos
+## Naming Rules
+**Allowed characters:**
+- Letters (`a–z`, `A–Z`)
+- Numbers (`0–9`)
+- Hyphen (`-`)
+- Underscore (`_`)
+The name is not valid if it starts with something else than a letter
+
+**Valid names:**
 
 ```bash
 rgc PostCard
 rgc post-card
-rgc button
+rgc post_card
+rgc Button2
 ```
 
-### Nombres incorrectos
+**Invalid names:**
 
 ```bash
 rgc 123
-rgc "Mi Componente"
+rgc "My Component"
+rgc 1Component
 ```
 
-## Manejo de errores
+If the name is invalid, the component is not created and an error message is shown.
 
-La CLI evita generar archivos cuando detecta situaciones que podrían producir resultados inesperados.
+---
 
-Algunos ejemplos:
+## Error Handling
 
-- El componente ya existe.
-- El nombre ingresado tiene un formato incorrecto.
-- No se proporcionó ningún nombre de componente.
+The CLI prevents unsafe operations:
 
-Ejemplo:
+- Component already exists
+- Invalid component name
+- Missing arguments
 
-```txt
+Example:
+
+```
 Error: Component "PostCard" already exists.
 ```
 
-## Estilos
+---
 
-El proyecto genera archivos `.css`.
+## Styling
 
-Por ahora no utiliza SCSS.
+Each component includes a dedicated CSS file:
 
-## Tecnologías
+```
+ComponentName.css
+```
 
-* Node.js
-* Commander.js
-* `fs`
-* `path`
+> SCSS is not supported at the moment.
+
+---
+
+## Example Workflow
+
+Create multiple components inside a project:
+
+```bash
+cd src/components
+rgc Header Sidebar Footer
+```
+
+Then create nested components:
+
+```bash
+cd PostGrid
+rgc PostCard
+cd ..
+```
+
+---
+
+## Tech Stack
+
+- Node.js
+- `fs` (file system)
+- `path` utilities
+- `process.argv` (CLI arguments)
+
+---
+
+## Why This Project Exists
+
+This tool was built to eliminate repetitive manual work when creating React components.
+
+Instead of creating folders, files, and boilerplate code manually, this CLI automates the process and enforces a consistent structure across projects.
+
+It also served as a way to learn how real-world CLI tools are built using Node.js, including argument parsing, file system manipulation, and project environment detection.
+
+---
+
+## License
+
+ISC
+
+---
+
+## Author
+
+Created by [@sackflorencia](https://github.com/sackflorencia)
