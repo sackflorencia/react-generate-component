@@ -6,9 +6,9 @@ Este proyecto automatiza la creación de carpetas, archivos y plantilla base de 
 
 ## ¿Why this project?
 
-Este proyecto nació para resolver una tarea repetitiva: crear componentes uno por uno, con su carpeta, su archivo principal y su archivo de estilos.
+Este proyecto nació para resolver una tarea repetitiva y tediosa: crear componentes uno por uno, con su carpeta, su archivo principal y su archivo de estilos.
 
-Cuando se trabaja con React y se organiza la interfaz en muchos componentes, hacerlo manualmente se vuelve tedioso y consume tiempo. Esta CLI resuelve ese problema con un comando simple y, además, permite aprender y trabajar con herramientas de Node.js orientadas a línea de comandos, algo que no siempre se usa cuando se trabaja con Node de forma más tradicional como backend de un proyecto.
+Cuando se trabaja con React y se organiza la interfaz en muchos componentes, hacerlo manualmente se vuelve tedioso y consume tiempo. Además de resolver una necesidad real de mi flujo de trabajo, el proyecto fue una oportunidad para profundizar en el desarrollo de herramientas de línea de comandos con Node.js, explorando conceptos como procesamiento de argumentos, generación de archivos y automatización de tareas.
 
 ## Características
 
