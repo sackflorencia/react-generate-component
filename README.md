@@ -201,6 +201,7 @@ This makes the tool automatically compatible with both JavaScript and TypeScript
 - Numbers (`0–9`)
 - Hyphen (`-`)
 - Underscore (`_`)
+
 The name is not valid if it starts with something else than a letter
 
 **Valid names:**
